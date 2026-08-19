@@ -26,7 +26,9 @@ transactional authority around:
 - an event-time retention floor that rejects unsafe old replays before removing the event ledger.
 
 The implementation, pure tests, real PostgreSQL tests, four-boundary true-process crash smoke, and bounded benchmark pass locally.
-Public remote and public multi-runtime CI receipts are still pending.
+The first public implementation run, [GitHub Actions 32201204205](https://github.com/estelledc/system-design-21-ad-click-aggregation/actions/runs/32201204205),
+also passed on Node 22/24/26 with PostgreSQL 17.11. Each job reported 18 pure tests and 8 PostgreSQL tests with zero
+failures, skips, or todos. This is a reproducibility receipt for the named synthetic boundary, not external product acceptance.
 
 This is deliberately not a Kafka, Flink, Beam, Cassandra, ClickHouse, Druid, billing, or fraud implementation. The lab models a
 small set of their surrounding correctness questions without claiming protocol compatibility or production scale.

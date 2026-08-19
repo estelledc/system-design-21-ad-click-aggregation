@@ -2,9 +2,10 @@
 
 ## Current status
 
-Local implementation gates pass on Node `v26.7.0` and PostgreSQL `17.11 (Homebrew)`. Public repository, clean-clone reproduction,
-Node 22/24/26 GitHub Actions, and external acceptance are pending. This page will not call the repository complete until the public
-receipts exist.
+Local implementation gates pass on Node `v26.7.0` and PostgreSQL `17.11 (Homebrew)`. The first public implementation run,
+[GitHub Actions 32201204205](https://github.com/estelledc/system-design-21-ad-click-aggregation/actions/runs/32201204205), passed from
+commit `29385668c80475623bca7b34e5ff11ba981ba987` in clean GitHub checkouts on Node 22/24/26 with the pinned PostgreSQL 17.11
+container. External advertising, billing, capacity, SLA, and product acceptance remain unproved and out of scope.
 
 ## Local correctness receipts
 
@@ -62,13 +63,28 @@ The local gate caught four implementation/fixture issues before any public run e
    was wrong.
 
 They were fixed in the test/helper layer without weakening event conflict, transaction, or count semantics. The eventual public CI
-history must disclose whether its first run is green; local fixes do not count as public evidence.
+history shows that the first implementation run was green; the fixes still count only as synthetic repository evidence.
 
-## Remaining completion gates
+## First public implementation run
 
-- repository policy/link/privacy scan and full local `check:ci`;
-- implementation commit with clean worktree;
-- public GitHub repository, topics, description, and default branch;
-- public Node 22/24/26 + PostgreSQL 17.11 run with zero skips and exact per-job results;
-- final documentation commit and a second green public run if evidence text changes;
-- parent project card/plan/restore metadata update bound to the final remote commit.
+Run `32201204205` used PostgreSQL `17.11` in every job. Each job passed the repository policy/link/privacy scan, dependency audit,
+18 pure tests, 8 real-PostgreSQL tests, four-process crash smoke, and the fixed benchmark with zero test failures, skips, or todos.
+
+| Job | Runtime | Result | Ingest | Process p50 / p95 | Publish | Query p50 / p95 | Correction |
+|---|---|---|---:|---:|---:|---:|---:|
+| [`95915230356`](https://github.com/estelledc/system-design-21-ad-click-aggregation/actions/runs/32201204205/job/95915230356) | Node `v22.23.2` | 18 + 8 tests; 0 fail/skip/todo | 955.277 events/s | 41.533 / 47.313 ms | 25.015 ms | 6.445 / 7.935 ms | 20.833 ms |
+| [`95915230220`](https://github.com/estelledc/system-design-21-ad-click-aggregation/actions/runs/32201204205/job/95915230220) | Node `v24.19.0` | 18 + 8 tests; 0 fail/skip/todo | 993.397 events/s | 44.521 / 49.897 ms | 25.313 ms | 6.632 / 8.123 ms | 21.269 ms |
+| [`95915230282`](https://github.com/estelledc/system-design-21-ad-click-aggregation/actions/runs/32201204205/job/95915230282) | Node `v26.7.0` | 18 + 8 tests; 0 fail/skip/todo | 1,045.033 events/s | 42.446 / 45.011 ms | 33.767 ms | 6.515 / 8.214 ms | 21.054 ms |
+
+These are concurrent hosted-runner observations, not a controlled Node-version comparison. Runner load, shared database-container
+resources, and scheduling differ; the values establish only that the bounded fixture completed and emitted its receipt.
+
+## Completion accounting
+
+- Repository policy/link/privacy scan and full local `check:ci`: complete.
+- Implementation commit with clean worktree: complete at `29385668c80475623bca7b34e5ff11ba981ba987`.
+- Public repository, topics, description, and default `main`: complete.
+- First public Node 22/24/26 + PostgreSQL 17.11 run: complete and green at `32201204205`.
+- Documentation evidence update: this commit must pass the same public matrix before the final remote commit is recorded in the
+  parent restore metadata.
+- External acceptance: not requested, not run, and not implied by repository completion.
