@@ -2,10 +2,22 @@
 
 ## Current status
 
-Local implementation gates pass on Node `v26.7.0` and PostgreSQL `17.11 (Homebrew)`. The first public implementation run,
-[GitHub Actions 32201204205](https://github.com/estelledc/system-design-21-ad-click-aggregation/actions/runs/32201204205), passed from
-commit `29385668c80475623bca7b34e5ff11ba981ba987` in clean GitHub checkouts on Node 22/24/26 with the pinned PostgreSQL 17.11
-container. External advertising, billing, capacity, SLA, and product acceptance remain unproved and out of scope.
+The identity-safe rewrite preserved every existing tree, message, and timestamp while mapping the four commits in order:
+
+- `0150c6157866331e47ff78b186590a0890b09f6d` → `8a2f359e98b03e833fd0847234ee42b5ad7bbfdd`
+- `046014a115834330309a9e1f55692dfa5b4f2fd4` → `a82c7a2d0edcd56656361050e12e841958dbce5b`
+- `29385668c80475623bca7b34e5ff11ba981ba987` → `fc3458f8b9d3d69872a8633b83a66c8d8080aee0`
+- `8f64c01093b6712e86d2700c16d72f3ecad1386c` → `def03aacf6828bde1d3db0f63f1e83ad6384b2a0`
+
+Current reachable `main` uses the repository owner's GitHub noreply identity. Rewritten baseline
+`def03aacf6828bde1d3db0f63f1e83ad6384b2a0` passed [CI run 32228055638](https://github.com/estelledc/system-design-21-ad-click-aggregation/actions/runs/32228055638)
+on Node 22/24/26 with the pinned PostgreSQL 17.11 container and the complete gate.
+
+Local implementation gates pass on Node `v26.7.0` and PostgreSQL `17.11 (Homebrew)`. Historical pre-rewrite
+[GitHub Actions 32201204205](https://github.com/estelledc/system-design-21-ad-click-aggregation/actions/runs/32201204205) passed from
+old implementation object `29385668c80475623bca7b34e5ff11ba981ba987`; its tree-equivalent current commit is
+`fc3458f8b9d3d69872a8633b83a66c8d8080aee0`, and the run remains bound to the old object. External advertising, billing,
+capacity, SLA, and product acceptance remain unproved and out of scope.
 
 ## Local correctness receipts
 
@@ -82,7 +94,7 @@ resources, and scheduling differ; the values establish only that the bounded fix
 ## Completion accounting
 
 - Repository policy/link/privacy scan and full local `check:ci`: complete.
-- Implementation commit with clean worktree: complete at `29385668c80475623bca7b34e5ff11ba981ba987`.
+- Implementation commit with clean worktree: complete at current equivalent `fc3458f8b9d3d69872a8633b83a66c8d8080aee0`.
 - Public repository, topics, description, and default `main`: complete.
 - First public Node 22/24/26 + PostgreSQL 17.11 run: complete and green at `32201204205`.
 - Documentation evidence update: this commit must pass the same public matrix before the final remote commit is recorded in the
