@@ -1,0 +1,43 @@
+{
+  "name": "system-design-21-ad-click-aggregation",
+  "version": "0.1.0",
+  "description": "Fenced event-time aggregation with immutable publication and correction receipts",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node src/main.js serve",
+    "lint": "node scripts/repo-check.mjs",
+    "test": "node --test --test-reporter=spec test/unit/*.test.js",
+    "test:infra": "node --test --test-reporter=spec test/integration/*.test.js",
+    "smoke:infra": "node scripts/infra-smoke.mjs",
+    "benchmark:infra": "node scripts/infra-benchmark.mjs",
+    "audit": "npm audit --audit-level=high",
+    "check": "npm run lint && npm test && npm run audit",
+    "check:ci": "npm run check && npm run test:infra && npm run smoke:infra && npm run benchmark:infra"
+  },
+  "dependencies": {
+    "pg": "8.23.0"
+  },
+  "keywords": [
+    "system-design",
+    "stream-processing",
+    "event-time",
+    "watermark",
+    "postgresql"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/estelledc/system-design-21-ad-click-aggregation.git"
+  },
+  "bugs": {
+    "url": "https://github.com/estelledc/system-design-21-ad-click-aggregation/issues"
+  },
+  "homepage": "https://github.com/estelledc/system-design-21-ad-click-aggregation#readme",
+  "license": "MIT"
+}
